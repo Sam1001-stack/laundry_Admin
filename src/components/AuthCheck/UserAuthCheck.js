@@ -4,17 +4,17 @@ import { useNavigate } from 'react-router'
 import { Navigate } from 'react-router'
 
 const UserAuthCheck = ({ children }) => {
-    // const navigate = useNavigate()
-    // const { email , _id } = useSelector((state) => state?.user?.data)
-    // useEffect(() => {
-    //     if (!email && !_id) {
-    //         navigate("/signin", { replace: true })
-    //     }
-    // },[ email , _id])
+    const navigate = useNavigate()
+    const { token } = useSelector((state) => state?.user?.data)
+    useEffect(() => {
+        if (!token) {
+            navigate("/signin", { replace: true })
+        }
+    },[ token])
 
-    // if(!email && !_id){
-    //     return <Navigate to="/signin" replace={true} />
-    // }
+    if(!token){
+        return <Navigate to="/signin" replace={true} />
+    }
     return (
         <>{children}</>
     )
